@@ -1,0 +1,55 @@
+version: '3.7'
+
+networks:
+  # Utilise le réseau créé précédemment pour votre cluster Hadoop
+  hadoop:
+    external: true
+    name: hadoop
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    hostname: zookeeper
+    container_name: zookeeper
+    networks:
+      - hadoop
+    ports:
+      - "2181:2181"
+    environment:
+      # Configuration minimale pour Zookeeper en mode standalone (STABLE)
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    restart: unless-stopped
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    hostname: kafka-broker
+    container_name: kafka-broker
+    networks:
+      - hadoop
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 # Kafka parle a ZK
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker:9092 # Le producer parle au broker
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+    restart: unless-stopped
+
+  producer:
+    build: 
+      context: .
+      dockerfile: Dockerfile.producer
+    container_name: review-producer
+    networks:
+      - hadoop
+    depends_on:
+      - kafka 
+    # AJOUT IMPORTANT : Connexion du fichier Windows au conteneur
+    # Assurez-vous que 'data.ndjson' est dans le meme dossier que ce fichier.
+    volumes:
+      - ./data.ndjson:/app/data.ndjson:ro
+    restart: unless-stopped

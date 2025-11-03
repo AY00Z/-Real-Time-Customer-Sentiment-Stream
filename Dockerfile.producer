@@ -1,0 +1,15 @@
+# Utilise une image Python de base
+FROM python:3.9-slim
+
+# Définit le répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copie les dépendances et les installe
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copie le script du producteur
+COPY producer.py .
+
+# Commande pour exécuter le script au démarrage du conteneur
+CMD ["python", "producer.py"]
