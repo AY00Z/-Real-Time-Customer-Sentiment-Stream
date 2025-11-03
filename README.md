@@ -26,6 +26,16 @@ Python (Producer, Sentiment Analysis)
 
 Docker / Docker Compose
 
+## Explication du Pipeline (Schéma)
+
+Votre architecture est divisée en trois phases principales, toutes orchestrées par Docker :
+
+| Phase | Description | Technologies |
+|-------|-------------|--------------|
+| **1. Ingestion & Réception (Vélocité)** | Votre conteneur Producer (Python) lit le fichier `data.ndjson` depuis votre PC local (via un volume Docker) et publie chaque avis, ligne par ligne, dans le Topic Kafka (`client_comments`). | Python, Docker, Kafka |
+| **2. Traitement & Analyse** | Spark Streaming (sur YARN) agit comme un consommateur. Il lit le flux Kafka, utilise une UDF (votre dictionnaire) pour classer le sentiment, et agrège les résultats toutes les 5 secondes. | Spark Streaming, YARN |
+| **3. Persistance & BI** | Spark écrit les résultats dans deux systèmes différents : **Archivage (Volume)** : Les avis bruts et analysés sont stockés dans des dossiers horodatés sur HDFS. | HDFS |
+
 
 
 ### 🚀 Guide de Démarrage (Pour un Nouvel Utilisateur)
