@@ -1,20 +1,20 @@
-## Real-Time Customer Sentiment Stream (Hadoop/Spark/Kafka)
+## Analyse de Sentiment Client en Temps Réel (Hadoop/Spark/Kafka)
 
-### Project Overview
+### Aperçu du Projet
 
-This project implements a highly resilient, end-to-end Big Data pipeline for real-time sentiment analysis of customer reviews. It demonstrates core skills in distributed computing, data streaming, and cross-platform container orchestration.
+Ce projet implémente un pipeline Big Data de bout en bout, hautement résilient, pour l'analyse de sentiment en temps réel des avis clients. Il démontre des compétences clés en informatique distribuée, streaming de données et orchestration de conteneurs multi-plateformes.
 
-### Key Features:
+### Fonctionnalités Clés :
 
-Real-time Ingestion: Leverages Kafka for high-throughput, fault-tolerant data streaming.
+Ingestion en Temps Réel : Utilise Kafka pour un streaming de données à haut débit et tolérant aux pannes.
 
-Distributed Processing: Utilizes Apache Spark Streaming on a Hadoop YARN cluster for scalable sentiment analysis.
+Traitement Distribué : Exploite Apache Spark Streaming sur un cluster Hadoop YARN pour une analyse de sentiment évolutive.
 
-Persistent Storage: Stores processed data in HDFS for archival 
+Stockage Persistant : Stocke les données traitées dans HDFS pour l'archivage.
 
-Containerized Environment: Orchestrates all services using Docker and Docker Compose for easy deployment and isolation.
+Environnement Conteneurisé : Orchestre tous les services avec Docker et Docker Compose pour un déploiement facile et une isolation optimale.
 
-### Technologies Used:
+### Technologies Utilisées :
 
 Apache Spark (2.2.0, DStreams)
 
@@ -22,7 +22,7 @@ Apache Kafka (0.8 API)
 
 Apache Hadoop (2.7.2, YARN/HDFS)
 
-Python (Producer, Sentiment Analysis)
+Python (Producer, Analyse de Sentiment)
 
 Docker / Docker Compose
 
