@@ -10,7 +10,7 @@ Real-time Ingestion: Leverages Kafka for high-throughput, fault-tolerant data st
 
 Distributed Processing: Utilizes Apache Spark Streaming on a Hadoop YARN cluster for scalable sentiment analysis.
 
-Persistent Storage: Stores processed data in HDFS for archival and aggregated metrics in MySQL for BI integration.
+Persistent Storage: Stores processed data in HDFS for archival 
 
 Containerized Environment: Orchestrates all services using Docker and Docker Compose for easy deployment and isolation.
 
